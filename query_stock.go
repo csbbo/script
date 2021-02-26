@@ -76,21 +76,20 @@ func parseData(content string) string {
 }
 
 func main() {
-	if fileExist(path) == false {
-		fmt.Println(path + "文件不存在")
-		return
-	}
-
-	var config Config
-	stream := loadFile(path)
-	err := json.Unmarshal([]byte(stream), &config)
-	if err != nil {
-		fmt.Println("json文件解析错误")
-		return
+	codes := []string{"002439"}
+	if fileExist(path) == true {
+		var config Config
+		stream := loadFile(path)
+		err := json.Unmarshal([]byte(stream), &config)
+		if err != nil {
+			fmt.Println("json文件解析错误")
+			return
+		}
+		codes = config.Codes
 	}
 
 	var stockRoseList []string
-	for _, code := range config.Codes {
+	for _, code := range codes {
 		content, err := getMarket(code)
 		if err != nil {
 			fmt.Println("数据获取失败")
