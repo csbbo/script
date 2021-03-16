@@ -10,6 +10,7 @@ import (
 func main() {
 	if len(os.Args) != 2 {
 		fmt.Println("Useage: ./v <name>")
+		return
 	}
 
 	resp, err := http.Get("http://shaobo.fun:8000/api/SearchPriceAPI?s="+os.Args[1])
